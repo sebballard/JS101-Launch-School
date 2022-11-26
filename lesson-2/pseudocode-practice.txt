@@ -1,0 +1,96 @@
+// a function that returns the sum of two numbers 
+
+Given two numbers
+Assign the sum of these two numbers to a variable
+Return this variable
+
+START
+
+# Given two numbers, number1 and number2
+
+SET result = number1 + number2
+
+PRINT result
+
+END
+
+
+// a function that takes an array of strings, and returns a string that is all those strings concatenated together 
+
+Given an array of only strings
+Make an empty string variable in the global space called stringsConcat
+Iterate through the array of strings
+  - for each iteration make stringsConcat = stringsConcat + the current string iteration
+after iterating through the initial array return stringsConcat
+
+START
+
+# Given an array of strings called strings
+
+SET newString = ""
+
+SET iterator = 0
+
+WHILE iterator < length of strings
+
+  newString = newString + string at the position of iterator
+
+  iterator += 1
+
+PRINT newString
+
+END
+
+
+
+// a method that takes an array of integers, and returns a new array with every other 
+// element from the original array, starting with the first element. For instance: 
+everyOther([1,4,7,2,5]); // => [1,7,5]
+
+Given an array of integers
+Create an empty array called everyOther
+Set an iterator variable at 0
+Make a for loop that increases the iterator by 2 each time. iterator must stay below length of 
+original array.
+Each repetition of the loop add the number of initial array at index of the iterator to the new array everyOther
+
+After completing the for loop return the new array everyOther
+
+
+
+
+
+// a function that determines the index of the 3rd occurrence of a given character in a string.
+
+
+Given a string and desired character
+Set a variable numberOfTimes to 0, representing the occurences of desired character.
+Use a for loop to generate index numbers 0 to length of string - 1:
+  - if the character at string position i equals desired character:
+    - add one to numberOfTimes
+  check if numberOfTimes equals 3:
+    - return the current index number
+
+If for loop completes without numberOfTimes reaching 3 return null
+
+
+
+
+
+// a function that takes two arrays of numbers and returns the result of merging the arrays. T
+//the elements of the first array should become the elements at the even indexes of the returned
+// array, while the elements of the second array should become the elements at the odd indexes.
+
+Given two arrays of equal length
+Create an empty array newArray
+Make a for loop that creates index numbers from 0 to length of the arrays - 1:
+  - First add element at current index from first array to newArray
+  - Next add element at current index from second array to newArray
+
+Once the loop is finished return newArray
+
+
+
+
+
+
