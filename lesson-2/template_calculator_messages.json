@@ -5,26 +5,32 @@
     "welcome": "Welcome to the calculator!",
     "firstNumber": "What is the first number?",
     "otherNumber": "What is the other number?",
-    "invalidNumber": "Hmm... that doesn't look like a valid number.",
+    "invalidNumber": "Hmm... that doesn't look like a valid number choice. Please try again.",
     "operationChoice": "What operation would you like to perform?\n1)Add 2)Subtract 3)Multiply 4)1st / 2nd 5)2nd / 1st",
     "invalidOperation": "Must choose 1, 2, 3, 4 or 5",
     "giveOutput": "The result is ",
     "nextChoice": {
       "1": "Would you like to: \n1)Perform a calculation on ",
-      "2": "\n2)Perform a new calculation\n3)Exit"
-    } 
+      "2": "\n2)Perform a new calculation\n3)Exit and write transcript to file"
+    },
+    "ansInfinity": "Looks like you tried to break me. I can't continue calculations with infinity. Do you want to:\n1)Perform a new calculation\n2)Exit and save transcript to file.",
+    "writeError": "It looks lie the following error occurred writing transcript to file: ",
+    "writeSuccess": "Successfully wrote file\nA transcript of your calculations can be found at "
   },
   "es": {
     "welcome": "Bienvenida a la calculadora!",
     "firstNumber": "¿Cuál es el primer número?",
     "otherNumber": "¿Cuál es el otro número?",
-    "invalidNumber": "Extraño... ese no parece un número válido.",
+    "invalidNumber": "Extraño... ese no parece un número válido. Inténtalo de nuevo.",
     "operationChoice": "¿Qué operación le gustaría realizar?\n1)Agregar 2)Sustraer 3)Multiplicar 4)1er / 2do 5)2do / 1er",
     "invalidOperation": "Debe elegir 1, 2, 3, 4 o 5",
     "giveOutput": "El resultado es ",
     "nextChoice": {
       "1": "Le gustaría: \n1)Realice un cálculo en ",
-      "2": "\n2)Realizar un nuevo cálculo\n3)Salida"
-    }
+      "2": "\n2)Realizar un nuevo cálculo\n3)Salir y escribir la transcripción en el archivo"
+    },
+    "ansInfinity": "Parece que intentaste romperme. No puedo continuar los cálculos con infinito. ¿Desea:\n1)Realizar un nuevo cálculo\n2)Salir y guardar la transcripción en un archivo.",
+    "writeError": "Parece mentira que se produjo el siguiente error al escribir la transcripción en el archivo: ",
+    "writeSuccess": "Escribió correctamente el archivo\nPuede encontrar una transcripción de sus cálculos en: "
   }
 }
