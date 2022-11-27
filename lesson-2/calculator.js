@@ -1,17 +1,45 @@
-// ask the user for the first number
-
-//ask the user for the second number
-
-// ask the user for the operation
-
-// perform the operation
-
-// display the result
-
 const readline = require('readline-sync');
+// const messageJSON = require('./calculator-messages.json');
+
+const fs = require("fs");
+
 
 function prompt(message) {
   console.log(`=> ${message}`);
+}
+
+// eslint-disable-next-line max-len
+function promptResponseRecord (message, recordingObj, isResponse = true) {
+  /* Uses prompt function to send message and record in recordingObj
+  optionally if isResponse, a response is requested and recorded.
+  Adds message and response as new object with keys named message and response.
+  Message response object is assigned as value to the key which is a digit of
+  which nth message response pair it is.
+  If isResponse returns response else returns null.
+  */
+
+  let response;
+
+  // Find how many messages have already been recorded, and add one to
+  // find which number message this is.
+  let messageNumber = Object.keys(recordingObj).length + 1;
+
+  prompt(message);
+
+  if (isResponse) {
+    response = readline.question();
+  } else {
+    response = "No response needed";
+  }
+
+  recordingObj[messageNumber] = {message: message, response: response};
+
+  // Only return response if there was one else let function return undefined
+  if (isResponse) {
+    return response;
+  } else {
+    return null;
+  }
 }
 
 function invalidNumber(number) {
@@ -44,7 +72,7 @@ function getOperator () {
   /* Asks user which operator to use. Validates input.
   Returns Number between 1 and 5.
   */
-  prompt("What operation would you like to perform?\n1) Add 2)Subtract 3)Multiply 4)1st / 2nd 5)2nd / 1st");
+  prompt("What operation would you like to perform?\n1)Add 2)Subtract 3)Multiply 4)1st / 2nd 5)2nd / 1st");
   let operation = readline.question();
 
   while (!['1', '2', '3', '4', '5'].includes(operation)) {
@@ -107,6 +135,11 @@ function runCalculator (reuseNumber = false, previousNum = NaN) {
     runCalculator();
   }
 }
+
+let messagesAndResponses = {};
+promptResponseRecord("How are you?", messagesAndResponses, true);
+
+console.log(messagesAndResponses)
 
 prompt("Welcome to the calculator!");
 
