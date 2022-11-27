@@ -1,0 +1,30 @@
+{
+  "en": {
+    "langChoice": "The language choices are:\n1)English\n2)Spanish",
+    "invalidLang": "Please choose a number representing an available language!",
+    "welcome": "Welcome to the calculator!",
+    "firstNumber": "What is the first number?",
+    "otherNumber": "What is the other number?",
+    "invalidNumber": "Hmm... that doesn't look like a valid number.",
+    "operationChoice": "What operation would you like to perform?\n1)Add 2)Subtract 3)Multiply 4)1st / 2nd 5)2nd / 1st",
+    "invalidOperation": "Must choose 1, 2, 3, 4 or 5",
+    "giveOutput": "The result is ",
+    "nextChoice": {
+      "1": "Would you like to: \n1)Perform a calculation on ",
+      "2": "\n2)Perform a new calculation\n3)Exit"
+    } 
+  },
+  "es": {
+    "welcome": "Bienvenida a la calculadora!",
+    "firstNumber": "¿Cuál es el primer número?",
+    "otherNumber": "¿Cuál es el otro número?",
+    "invalidNumber": "Extraño... ese no parece un número válido.",
+    "operationChoice": "¿Qué operación le gustaría realizar?\n1)Agregar 2)Sustraer 3)Multiplicar 4)1er / 2do 5)2do / 1er",
+    "invalidOperation": "Debe elegir 1, 2, 3, 4 o 5",
+    "giveOutput": "El resultado es ",
+    "nextChoice": {
+      "1": "Le gustaría: \n1)Realice un cálculo en ",
+      "2": "\n2)Realizar un nuevo cálculo\n3)Salida"
+    }
+  }
+}

@@ -1,7 +1,14 @@
 const readline = require('readline-sync');
-// const messageJSON = require('./calculator-messages.json');
 
 const fs = require("fs");
+
+const MESSAGES = require("./template_calculator_messages.json");
+
+let messagesAndResponses = {};
+
+let langChoice = getLangChoice();
+
+const LANG_MESSAGES = MESSAGES[langChoice];
 
 
 function prompt(message) {
@@ -9,7 +16,7 @@ function prompt(message) {
 }
 
 // eslint-disable-next-line max-len
-function promptResponseRecord (message, recordingObj, isResponse = true) {
+function promptResponseRecord (message, isResponse = true, recordingObj = messagesAndResponses) {
   /* Uses prompt function to send message and record in recordingObj
   optionally if isResponse, a response is requested and recorded.
   Adds message and response as new object with keys named message and response.
@@ -34,7 +41,7 @@ function promptResponseRecord (message, recordingObj, isResponse = true) {
 
   recordingObj[messageNumber] = {message: message, response: response};
 
-  // Only return response if there was one else let function return undefined
+  // Only return response if there was one else let function return null
   if (isResponse) {
     return response;
   } else {
@@ -54,16 +61,13 @@ function getNumber(isFirst) {
   */
   let number;
   if (isFirst) {
-    prompt("What is the first number?");
-    number = readline.question();
+    number = promptResponseRecord(LANG_MESSAGES["firstNumber"]);
   } else {
-    prompt("What is the other number?");
-    number = readline.question();
+    number = promptResponseRecord(LANG_MESSAGES["otherNumber"]);
   }
 
   while (invalidNumber(number)) {
-    prompt("Hmm... that doesn't look like a valid number.");
-    number = readline.question();
+    number = promptResponseRecord(LANG_MESSAGES["invalidNumber"]);
   }
   return number;
 }
@@ -72,12 +76,9 @@ function getOperator () {
   /* Asks user which operator to use. Validates input.
   Returns Number between 1 and 5.
   */
-  prompt("What operation would you like to perform?\n1)Add 2)Subtract 3)Multiply 4)1st / 2nd 5)2nd / 1st");
-  let operation = readline.question();
-
+  let operation = promptResponseRecord(LANG_MESSAGES["operationChoice"]);
   while (!['1', '2', '3', '4', '5'].includes(operation)) {
-    prompt("Must choose 1, 2, 3, 4 or 5");
-    operation = readline.question();
+    operation = promptResponseRecord(LANG_MESSAGES["invalidOperation"]);
   }
   return operation;
 }
@@ -85,8 +86,9 @@ function getOperator () {
 // eslint-disable-next-line max-lines-per-function
 function performCalculation(number1, number2, operation) {
   /* Takes two numbers as operands. Input for operation
-  to perform expected as Number as follows:
-  1-addition, 2- subtraction, 3- multiplication, 4- division
+  expected as Number representing:
+  1-addition, 2- subtraction, 3- multiplication, 4- division n1/n2 
+  5- division n2/n1
   Returns the the result of this calculation as Number.
   */
   let output;
@@ -107,13 +109,14 @@ function performCalculation(number1, number2, operation) {
       output = Number(number2) / Number(number1);
       break;
   }
-  prompt(`The result is ${output}`);
+  promptResponseRecord(LANG_MESSAGES["giveOutput"] + output, false);
   return output;
 }
 
-function runCalculator (reuseNumber = false, previousNum = NaN) {
+function runCalculator (reuseNumber = false, previousNum = NaN, lang = "1") {
   let number1;
   let number2;
+
   if (reuseNumber) {
     number1 = previousNum;
   } else {
@@ -124,10 +127,8 @@ function runCalculator (reuseNumber = false, previousNum = NaN) {
   let operation = getOperator();
 
   let output = performCalculation(number1, number2, operation);
-  prompt(`Would you like to: \n1)Perform a calculation on ${output}\n`
-  + `2)Perform a new calculation\n3)Exit`);
-
-  let userAnswer = readline.question();
+  let userAnswer = promptResponseRecord(LANG_MESSAGES["nextChoice"]["1"] + `${output}` +
+  LANG_MESSAGES["nextChoice"]["2"]);
 
   if (userAnswer === "1") {
     runCalculator(true, output);
@@ -136,12 +137,41 @@ function runCalculator (reuseNumber = false, previousNum = NaN) {
   }
 }
 
-let messagesAndResponses = {};
-promptResponseRecord("How are you?", messagesAndResponses, true);
+function toJsonAndSave(path, infoObject = messagesAndResponses) {
+  const jsonString = JSON.stringify(infoObject, null, 2);
 
-console.log(messagesAndResponses)
+  fs.writeFile(path, jsonString,
+    function (err) {
+      if (err) {
+        console.log(`Error writing file: ${err}`);
+      } else {
+        console.log("Successfully wrote file");
+        console.log(`A transcript of your calculations can be found at ${path}`)
+      }
+    }
+  );
+}
 
-prompt("Welcome to the calculator!");
+function getLangChoice() {
+  let languageChoice = promptResponseRecord(MESSAGES["en"]["langChoice"]);
+
+
+  if (languageChoice === "1") {
+    return "en";
+  } else if (languageChoice === "2") {
+    return "es";
+  } else {
+    promptResponseRecord(MESSAGES["en"]["invalidLang"], false)
+    languageChoice = getLangChoice();
+  }
+  return languageChoice;
+}
+
+
+promptResponseRecord(LANG_MESSAGES["welcome"], false);
 
 runCalculator();
+
+toJsonAndSave("./calculator_messages.json");
+
 
