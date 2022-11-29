@@ -8,16 +8,7 @@ let goodbyeIndex = Math.floor(Math.random() * GOODBYES.length);
 
 
 function isNumberAndInRange(possibleNumber, minVal = 0, tooHighVal = Infinity) {
-  /* Checks if input is or can be coerced to type Number and whether '
-  /  it is at least minVal, and below tooHighVal.
-  /  Returns true if conditions are met else false.
-  */
-
-  // If possibleNumber is type string:
-  //  If empty or only whitespace as these coerce to zero
-  //  Remove commas and periods as otherwise string may be coerced
-  //  to wrong number
-
+  
   if (typeof possibleNumber === "string") {
     if (possibleNumber.trimStart() === "") {
       return false;
@@ -112,7 +103,7 @@ function calculateMonthlyPayment(loanAmount, monthlyInterestRate,
 }
 
 function doNewCalculation() {
-  
+
   let userResponse = getNumber("Would you like to do a new calculation?\nType 1 if Yes. Type 2 to exit.");
 
   while ((!userResponse) || (!isNumberAndInRange(userResponse, 1, 3))) {
