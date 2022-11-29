@@ -41,11 +41,7 @@ function numToTwoDecimals(number) {
 }
 
 function getNumber(message, removeCommasPeriods = false) {
-  /* Displays message on the console and records response
-  /  from user.
-  /  removeCommasPeriods can be set to true to remove any ","
-  /  or "." as they are often used to represent large numbers.
-  */
+
   prompt(message);
 
   let number = readline.question();
@@ -58,9 +54,6 @@ function getNumber(message, removeCommasPeriods = false) {
 }
 
 function getLoanAmount() {
-  /* Ask user for size of loan until valid input is received.
-  *  Returns loan amount as Number above zero and below infinity
-  */
 
   let loanAmount = getNumber("What is the total loan amount in $?", true);
 
@@ -72,12 +65,7 @@ function getLoanAmount() {
 
   return Number(loanAmount);
 }
-
 function getMonthlyInterest() {
-  /* Gets APR from user and validates.
-  *  Converts APR to interest rate per month.
-  *  Returns interest rate as Number in decimal format between. ie .05%
-  */
 
   let interestPerMonth;
   let aprDecimal;
@@ -98,9 +86,6 @@ function getMonthlyInterest() {
 }
 
 function getDurationMonths() {
-  /* Ask user for loan duration in months until valid input is given.
-  *  Return duration as number
-  */
 
   let durationMonths = getNumber("What is the duration of the loan in months? ie 24");
 
@@ -127,6 +112,7 @@ function calculateMonthlyPayment(loanAmount, monthlyInterestRate,
 }
 
 function doNewCalculation() {
+  
   let userResponse = getNumber("Would you like to do a new calculation?\nType 1 if Yes. Type 2 to exit.");
 
   while ((!userResponse) || (!isNumberAndInRange(userResponse, 1, 3))) {
